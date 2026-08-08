@@ -94,15 +94,33 @@ body.gate-lock{ overflow:hidden; height:100vh; }
   font-family:var(--font-data); font-weight:600; color:var(--gold); font-size:15px; letter-spacing:1px;
 }
 .enter-hint{
-  position:absolute; bottom:-84px; left:0; right:0; text-align:center;
+  position:absolute; bottom:-72px; left:0; right:0; text-align:center;
   font-family:var(--font-display); font-weight:400; font-size:13px; color:var(--muted);
-  opacity:0; transition:opacity .4s ease; letter-spacing:2px; cursor:pointer;
+  opacity:0; transition:opacity .3s ease; letter-spacing:3px;
 }
-.enter-hint span{ display:inline-block; animation:bob 1.6s ease-in-out infinite; margin-top:4px; }
-.enter-hint.show{ opacity:1; }
+.enter-hint.show{ opacity:1; animation:igniteFlicker .5s ease-in-out infinite; }
 #entry-gate.ready #frost-block::before{ animation-duration:1s; }
+@keyframes igniteFlicker{ 0%,100%{ opacity:.55; } 50%{ opacity:1; } }
 
-#shatter-layer{ position:absolute; inset:0; display:none; }
+/* -- crack layer: hairline fractures that "draw" outward from center -- */
+#crack-layer{
+  position:absolute; inset:0; width:100%; height:100%; z-index:3; pointer-events:none;
+  overflow:visible;
+}
+.crack-path{
+  opacity:0;
+  filter:drop-shadow(0 0 3px rgba(255,248,230,.9)) drop-shadow(0 0 10px rgba(225,202,34,.5));
+}
+
+/* -- light burst: the bright flash that blows out through the cracks -- */
+#light-burst{
+  position:absolute; left:50%; top:50%; width:40px; height:40px; margin:-20px 0 0 -20px;
+  border-radius:50%;
+  background:radial-gradient(circle, #fffef4 0%, #ffedb8 30%, rgba(255,214,120,.55) 58%, rgba(255,214,120,0) 74%);
+  opacity:0; transform:scale(0); z-index:4; pointer-events:none; will-change:transform,opacity;
+}
+
+#shatter-layer{ position:absolute; inset:0; display:none; z-index:5; }
 .shard{
   position:absolute; background:linear-gradient(135deg, rgba(255,255,255,.05), rgba(212,41,31,.05));
   border:1px solid rgba(255,255,255,.04);
@@ -180,6 +198,10 @@ body.gate-lock{ overflow:hidden; height:100vh; }
   position:absolute; inset:0; pointer-events:none;
   background:radial-gradient(ellipse at center, transparent 38%, rgba(0,0,0,.6) 100%);
 }
+#cine-fade-veil{
+  position:absolute; inset:0; pointer-events:none; z-index:14;
+  background:var(--ink); opacity:0;
+}
 .cine-skip{
   position:absolute; top:24px; right:24px; z-index:20;
   font-family:var(--font-data); font-weight:600; font-size:11px; letter-spacing:1.5px; text-transform:uppercase;
@@ -197,6 +219,8 @@ body.gate-lock{ overflow:hidden; height:100vh; }
 .cine-text p{ font-family:var(--font-data); font-size:14px; color:var(--muted); margin-top:10px; letter-spacing:.3px; }
 .s1-left{ top:16%; left:6%; }
 .s1-right{ top:62%; right:6%; text-align:right; margin-left:auto; }
+.s1-details{ top:42%; left:50%; margin-left:-160px; text-align:center; max-width:320px; }
+.cine-details h3{ font-size:clamp(22px,3.2vw,32px); }
 
 .cine-finale{
   position:absolute; inset:0; z-index:16; display:flex; flex-direction:column; align-items:center; justify-content:flex-end;
@@ -354,12 +378,6 @@ body.gate-lock{ overflow:hidden; height:100vh; }
 .contact-card a.link:hover{ color:var(--red); }
 
 /* ============================================================
-   3D MODEL CREDIT
-   ============================================================ */
-.model-credit{ font-size:11px; color:var(--muted); text-align:center; margin-top:14px; padding-bottom:20px; font-family:var(--font-data); }
-.model-credit a{ color:var(--muted); text-decoration:underline; }
-
-/* ============================================================
    FOOTER
    ============================================================ */
 footer{ background:var(--ink-2); color:var(--cream); padding:60px 0 0; border-top:1px solid rgba(255,255,255,.08); }
@@ -392,6 +410,10 @@ footer ul a:hover{ color:var(--gold); }
   animation:ctaPulse 3s ease-in-out infinite;
 }
 .wa-float:hover{ animation-play-state:paused; transform:scale(1.08); }
+/* while the hero video is on screen, this button is locked exactly over its
+   watermark (see js/cinematic.js) instead of bobbing in the corner */
+.wa-float.wa-on-mark{ animation-play-state:paused; transform:translate(-50%,-50%); }
+.wa-float.wa-on-mark:hover{ transform:translate(-50%,-50%) scale(1.08); }
 
 /* ============================================================
    REVEAL ON SCROLL

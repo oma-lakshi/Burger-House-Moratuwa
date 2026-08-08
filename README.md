@@ -1,20 +1,28 @@
 # Burger House — Website
 
-Premium dark editorial theme (cravburgers.shop-inspired), FPV-style scroll-driven 3D camera flight, split across two pages. Static frontend + Supabase backend. GitHub → Netlify or Vercel.
+Premium dark editorial theme (cravburgers.shop-inspired), scroll-driven hero split across two pages. Static frontend + Supabase backend. GitHub → Netlify or Vercel.
 
 ## 1. What's fixed / changed in this update
 
-**Camera bug fixed.** The 3D flight was rendering the *inside* of the burger model (huge blown-up close-up faces filling the screen) because the camera keyframe positions were hand-guessed fixed numbers that didn't match the model's actual scale. `js/cinematic.js` now measures the model's real bounding size the moment it loads and positions the camera as a multiple of that measurement — the camera is now mathematically guaranteed to stay outside the geometry at every point in the scroll, on any device.
+**The 3D model is gone — the hero is now your real burger video, scrubbed frame by frame.** Playing an actual `<video>` tied to scroll was the source of the lag (browsers aren't built to seek video frame-accurately on every scroll tick). Instead, `Burger_video.mp4` was cut into 120 individual JPG frames (`assets/frames/frame_0001.jpg` … `frame_0120.jpg`, 854×480, ~4.3MB total) that all preload up front. While you scroll through the hero, `js/cinematic.js` just picks the right frame for the current scroll position and draws it straight to a `<canvas>` — no video decoding or seeking happens during scroll at all, so it stays smooth even on modest phones. The source `Burger_video.mp4` itself isn't needed on the deployed site — it was only used once, locally, to generate the frame set.
 
-**Two pages now, not one long scroll.**
-- **`index.html`** — the entry gate, the FPV camera-flight experience, the headline block, the ticker, the quality grid, and a closing "View Menu" call-to-action. This is the *experience*.
-- **`menu.html`** — the actual ordering page: full Menu, Add-Ons, Hours & Location (with the Moratuwa/Nugegoda branch tabs), and Contact. Loads instantly since it doesn't need Three.js or GSAP at all.
+**Shop details now show up during that first scroll, too.** Alongside the existing "Stacked. Grilled. / Devoured." captions, a centered panel now appears partway through the hero with the hours and both branch names, before the finale logo/CTA. Same reveal system as before (`OVERLAYS` array in `js/cinematic.js`, tied to scroll progress 0–1).
 
-Nav links and the footer on both pages cross-link correctly. The `#hours`/`#menu`/`#contact` anchors only exist on `menu.html` now.
+**A proper transition out of the hero.** In the last ~10% of the hero's scroll, a dark veil now fades in over the frame (`#cine-fade-veil`) right as the finale CTA appears, so it settles to black before the pin releases into "THE BURGER SMASHED FRESH" headline section below, instead of cutting straight across.
 
-## 2. If a camera shot still looks off
+**The watermark on the video is hidden by the WhatsApp button — precisely, not just eyeballed.** The clip has a small star watermark, bottom-right. Rather than nail down one fixed pixel offset (which would drift off-mark the moment the video is cropped differently on a wider or narrower screen), the WhatsApp button's position is now computed every frame with the exact same "cover" math used to draw the video itself, so it locks onto the watermark's real on-screen position at any window size. It also briefly stops its usual bob/pulse animation while doing this, so it sits dead still over the mark instead of wobbling off it. Once you scroll past the hero (or on `menu.html`, which never shows the video), it's back to its normal spot floating bottom-right.
 
-Since I can't render WebGL in my own environment, I can't preview the exact framing myself. If any specific moment during the scroll still looks too close, too far, or angled oddly, tell me **roughly what scroll percentage** it happens at (e.g. "about a third of the way through the flight, the camera is too close") and I'll adjust the `KF` array in `js/cinematic.js` directly — each entry is one keyframe with a `dist` (distance from the burger, in multiples of its own size) and `dir` (which direction the camera sits in). No rebuild needed, just number tweaks.
+**The WhatsApp button now actually works out of the box.** Previously its link only ever got set from Supabase's `settings.whatsapp_shop` — with Supabase still unconfigured (see §3), that code path never ran, so the button sat at `href="#"` and did nothing when clicked. It now gets a real working link immediately on page load; your dashboard's WhatsApp number will still override it automatically once Supabase is connected.
+
+**The loading screen now launches itself.** It no longer waits for you to scroll, tap, or press a key. It shows the ring/percentage loader for at least ~1 second (even if everything's cached and loads instantly), then automatically plays a crack-and-flash transition — hairline cracks race out from the center, then a bright burst of light blows through them — before the debris flies apart and the site opens straight into the hero, ready to scroll.
+
+## 2. If a scroll moment still looks off
+
+Since I can't play video/scroll in my own environment, I can't preview the exact framing myself. Two things you can adjust directly in `js/cinematic.js`:
+- **Which frame shows at which scroll point** — it's a straight 0–1 mapping across all 120 frames, so this should already track the footage evenly. If you want a different pace, adjust the maths in `updateScene()`.
+- **When the caption panels appear** — edit the `OVERLAYS` array (each row is `[selector, startProgress, endProgress]`, both 0–1).
+
+If you ever swap in a different clip, drop the new file in as `Burger_video.mp4`-equivalent and let me know — I'll re-cut the frame sequence and update `FRAME_COUNT` to match.
 
 ## 3. Supabase setup (still pending)
 
@@ -23,7 +31,7 @@ Since I can't render WebGL in my own environment, I can't preview the exact fram
 2. Authentication → Users → add a staff login
 3. Project Settings → API → copy Project URL + anon public key into `js/supabase-config.js`
 
-The entry gate and 3D flight on `index.html` work without this. `menu.html`'s Menu/Hours/Contact and the dashboard need it.
+The entry gate and hero on `index.html` work without this (and the WhatsApp button now works without it too — see §1). `menu.html`'s Menu/Hours/Contact and the dashboard still need it.
 
 ## 4. Deploy
 
@@ -32,18 +40,19 @@ Netlify (`netlify.toml` sets publish dir automatically) or Vercel (auto-detected
 ## 5. Files
 
 ```
-index.html                 entry gate + FPV camera flight + headline/marquee/quality + closing CTA
+index.html                 entry gate + frame-sequence hero + headline/marquee/quality + closing CTA
 menu.html                   menu, add-ons, hours & location, contact — the ordering page
 dashboard.html               staff dashboard
 netlify.toml
 css/style.css                 full design system (shared by all three pages)
 css/dashboard.css             dashboard-only styles
 js/supabase-config.js         your Supabase URL + anon key — still needs filling in
-js/cinematic.js               Scene 0 shatter intro + FPV camera-flight engine (now scale-safe)
+js/cinematic.js               Scene 0 crack/light-burst intro (auto-launches) + scroll-driven frame-sequence hero
 js/app.js                     menu / branches / contact data + interactions — shared by index.html and menu.html, auto-detects which elements exist on each page
 js/dashboard.js               dashboard CRUD logic
 sql/01_schema.sql             database tables + security rules
 sql/02_seed.sql               real menu/contact/hours/branches data
 assets/logo-original.png      your real logo, background removed
-assets/models/burger.glb      optimized 3D burger (465KB), CC-BY-4.0 — Roberto Domínguez
+assets/frames/frame_0001.jpg…frame_0120.jpg   the hero video, pre-cut into a 120-frame JPG sequence (~4.3MB total)
+assets/models/burger.glb      no longer used by the site — kept here in case you want it back; safe to delete
 ```

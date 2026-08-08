@@ -12,15 +12,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Manrope:wght@400;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="css/style.css">
-
-<script type="importmap">
-{
-  "imports": {
-    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
-    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
-  }
-}
-</script>
 </head>
 <body id="page-top" class="gate-lock">
 
@@ -35,8 +26,27 @@
       </svg>
     </div>
     <div class="frost-pct" id="frost-pct">0%</div>
-    <div class="enter-hint" id="enter-hint">SCROLL OR TAP TO IGNITE<br><span>▼</span></div>
+    <div class="enter-hint" id="enter-hint">IGNITING</div>
   </div>
+
+  <svg id="crack-layer" viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice">
+    <g id="crack-lines" fill="none" stroke="#fff8e6" stroke-width="1.6" stroke-linecap="round">
+      <path class="crack-path" d="M200,200 L150,88"/>
+      <path class="crack-path" d="M200,200 L252,66 L270,34"/>
+      <path class="crack-path" d="M200,200 L322,148"/>
+      <path class="crack-path" d="M200,200 L339,232 L368,258"/>
+      <path class="crack-path" d="M200,200 L258,332"/>
+      <path class="crack-path" d="M200,200 L163,347 L138,378"/>
+      <path class="crack-path" d="M200,200 L68,270"/>
+      <path class="crack-path" d="M200,200 L53,138 L28,102"/>
+      <path class="crack-path" d="M200,200 L118,152"/>
+      <path class="crack-path" d="M200,200 L282,238"/>
+      <path class="crack-path" d="M200,200 L235,145 L255,110"/>
+      <path class="crack-path" d="M200,200 L150,258 L120,290"/>
+    </g>
+  </svg>
+  <div id="light-burst"></div>
+
   <div id="shatter-layer"></div>
 </div>
 
@@ -64,6 +74,7 @@
   <div id="cine-pin">
     <div class="cine-canvas-wrap"><canvas id="cine-canvas"></canvas></div>
     <div class="cine-vignette"></div>
+    <div id="cine-fade-veil"></div>
     <button class="cine-skip" id="cine-skip">Skip Intro ↓</button>
 
     <div class="cine-text s1-left">
@@ -74,6 +85,11 @@
     <div class="cine-text s1-right">
       <h3>Devoured.</h3>
       <p>Fresh patties, real cheese, zero shortcuts.</p>
+    </div>
+    <div class="cine-text cine-details s1-details">
+      <span class="eyebrow">Find Us</span>
+      <h3>Open Daily<br>8AM – 1AM</h3>
+      <p>Moratuwa &amp; Nugegoda · Delivery on Uber Eats</p>
     </div>
 
     <div class="cine-finale">
@@ -189,7 +205,6 @@
   <div class="credit-bar">
     Web Engineered and developed by <a id="credit-wa" href="#" target="_blank" rel="noopener">Omesh Lakshitha</a> — +94 77 475 0576
   </div>
-  <p class="model-credit">3D model: "Hamburguesa Explosiva Con Queso" by <a href="https://sketchfab.com/vmmaniac" target="_blank" rel="noopener">Roberto Domínguez</a>, licensed CC-BY-4.0</p>
 </footer>
 
 <a class="wa-float" id="wa-float-shop" href="#" target="_blank" rel="noopener" aria-label="WhatsApp us">💬</a>
