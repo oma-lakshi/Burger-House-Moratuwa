@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Burger House — Moratuwa &amp; Nugegoda | Stacked. Grilled. Devoured.</title>
+<meta name="description" content="Burger House Sri Lanka — Kottu, Dolphin, Fried Rice, Submarines & more. Order delivery on Uber Eats, open 8AM–1AM daily. Moratuwa & Nugegoda.">
+<link rel="icon" href="assets/logo-original.png" type="image/png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Manrope:wght@400;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/style.css">
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+</head>
+<body id="page-top" class="gate-lock">
+
+<!-- ===================== SCENE 0 — ENTRY GATE ===================== -->
+<div id="entry-gate">
+  <div id="frost-block">
+    <img class="frost-logo" src="assets/logo-original.png" alt="Burger House">
+    <div class="frost-ring-wrap">
+      <svg viewBox="0 0 120 120">
+        <circle class="frost-ring-bg" cx="60" cy="60" r="54"/>
+        <circle id="frost-ring" cx="60" cy="60" r="54"/>
+      </svg>
+    </div>
+    <div class="frost-pct" id="frost-pct">0%</div>
+    <div class="enter-hint" id="enter-hint">SCROLL OR TAP TO IGNITE<br><span>▼</span></div>
+  </div>
+  <div id="shatter-layer"></div>
+</div>
+
+<!-- ===================== NAV ===================== -->
+<nav class="site-nav" id="site-nav">
+  <div class="container">
+    <a href="#page-top" class="brand">
+      <img src="assets/logo-original.png" alt="Burger House logo">
+      <span>BURGER<br>HOUSE</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="menu.html#menu">Menu</a></li>
+      <li><a href="menu.html#hours">Hours &amp; Location</a></li>
+      <li><a href="menu.html#contact">Contact</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a class="btn btn-sm btn-order" data-order-btn href="#" target="_blank" rel="noopener">Order Now</a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Menu"><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<!-- ===================== SCENES 1–4 — FPV CAMERA FLIGHT ===================== -->
+<div id="cine-root">
+  <div id="cine-pin">
+    <div class="cine-canvas-wrap"><canvas id="cine-canvas"></canvas></div>
+    <div class="cine-vignette"></div>
+    <button class="cine-skip" id="cine-skip">Skip Intro ↓</button>
+
+    <div class="cine-text s1-left">
+      <span class="eyebrow">Moratuwa &amp; Nugegoda</span>
+      <h3>Stacked.<br>Grilled.</h3>
+      <p>Every layer, assembled right in front of you.</p>
+    </div>
+    <div class="cine-text s1-right">
+      <h3>Devoured.</h3>
+      <p>Fresh patties, real cheese, zero shortcuts.</p>
+    </div>
+
+    <div class="cine-finale">
+      <img class="logo-monolith" src="assets/logo-original.png" alt="Burger House">
+      <div class="cine-cta">
+        <a class="btn btn-pulse" data-order-btn href="#" target="_blank" rel="noopener"><span class="icon">🍔</span> Order Now</a>
+        <a class="btn btn-outline" href="menu.html#hours"><span class="icon">📍</span> Find Our Shop</a>
+      </div>
+    </div>
+
+    <div class="scroll-cue"><span>▼</span>SCROLL</div>
+  </div>
+</div>
+
+<!-- ===================== HEADLINE STACK ===================== -->
+<section class="headline-stack">
+  <div class="container">
+    <div class="headline-row reveal">
+      <h2><span class="ghost">THE BURGER</span><span class="solid">THE BURGER</span></h2>
+    </div>
+    <div class="headline-row reveal">
+      <h2><span class="ghost">SMASHED&nbsp;FRESH</span><span class="solid accent">SMASHED&nbsp;FRESH</span></h2>
+    </div>
+    <p class="headline-sub reveal">Grilled hot, stacked high, our patties lock in every bit of juice under a caramelized crust — topped fresh, served loud, since day one in Moratuwa.</p>
+  </div>
+</section>
+
+<!-- ===================== MARQUEE ===================== -->
+<div class="marquee">
+  <div class="marquee-track">
+    <span>Flame Grilled</span><span>Moratuwa</span><span>Nugegoda</span><span>Open 8AM–1AM</span><span>Order On Uber Eats</span>
+    <span>Flame Grilled</span><span>Moratuwa</span><span>Nugegoda</span><span>Open 8AM–1AM</span><span>Order On Uber Eats</span>
+  </div>
+</div>
+
+<!-- ===================== QUALITY GRID ===================== -->
+<section class="section" id="quality">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="eyebrow">Pure Quality</span>
+      <h2>Every Layer,<br>Signature Flavor</h2>
+    </div>
+    <div class="quality-grid">
+      <div class="quality-card reveal">
+        <div class="emoji">🧀</div>
+        <h3>Real Cheddar</h3>
+        <p>Melted, not processed</p>
+      </div>
+      <div class="quality-card reveal">
+        <div class="emoji">🥩</div>
+        <h3>Flame Grilled Patty</h3>
+        <p>Charred crust, juicy center</p>
+      </div>
+      <div class="quality-card reveal">
+        <div class="emoji">🍅</div>
+        <h3>Fresh Tomato</h3>
+        <p>Sliced daily, never frozen</p>
+      </div>
+      <div class="quality-card reveal">
+        <div class="emoji">🥬</div>
+        <h3>Crisp Lettuce</h3>
+        <p>Garden fresh crunch</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CLOSING CTA ===================== -->
+<section class="section" style="text-align:center;">
+  <div class="container">
+    <span class="eyebrow reveal">Hungry Yet?</span>
+    <h2 class="reveal" style="font-size:clamp(28px,4.6vw,48px);margin-top:16px;">See The Full Menu<br>&amp; Find Your Branch</h2>
+    <div class="reveal" style="margin-top:30px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
+      <a class="btn btn-pulse" href="menu.html#menu"><span class="icon">🍔</span> View Menu</a>
+      <a class="btn btn-outline" href="menu.html#hours"><span class="icon">📍</span> Hours &amp; Location</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="container footer-grid">
+    <div>
+      <div class="footer-brand">
+        <img src="assets/logo-original.png" alt="Burger House logo">
+        <span>BURGER HOUSE</span>
+      </div>
+      <p style="max-width:280px;font-size:14px;color:var(--muted);">Stacked. Grilled. Devoured. Sri Lanka's home for Kottu, Dolphin, and everything between two buns — Moratuwa &amp; Nugegoda.</p>
+      <div class="social-row">
+        <a data-social="instagram" href="#" target="_blank" rel="noopener" aria-label="Instagram">📸</a>
+        <a data-social="tiktok" href="#" target="_blank" rel="noopener" aria-label="TikTok">🎵</a>
+        <a data-social="facebook" href="#" target="_blank" rel="noopener" aria-label="Facebook">📘</a>
+      </div>
+    </div>
+    <div>
+      <h4>Explore</h4>
+      <ul>
+        <li><a href="#page-top">The Experience</a></li>
+        <li><a href="menu.html#menu">Menu</a></li>
+        <li><a href="menu.html#hours">Hours &amp; Location</a></li>
+        <li><a href="menu.html#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Order</h4>
+      <ul>
+        <li><a data-order-btn href="#" target="_blank" rel="noopener">Uber Eats Delivery</a></li>
+        <li><a data-call-btn href="tel:+94772299827">Call to Order</a></li>
+        <li><a href="dashboard.html">Staff Login</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="credit-bar">
+    Web Engineered and developed by <a id="credit-wa" href="#" target="_blank" rel="noopener">Omesh Lakshitha</a> — +94 77 475 0576
+  </div>
+  <p class="model-credit">3D model: "Hamburguesa Explosiva Con Queso" by <a href="https://sketchfab.com/vmmaniac" target="_blank" rel="noopener">Roberto Domínguez</a>, licensed CC-BY-4.0</p>
+</footer>
+
+<a class="wa-float" id="wa-float-shop" href="#" target="_blank" rel="noopener" aria-label="WhatsApp us">💬</a>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase-config.js"></script>
+<script type="module" src="js/cinematic.js"></script>
+<script type="module" src="js/app.js"></script>
+</body>
+</html>

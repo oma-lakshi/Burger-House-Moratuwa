@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Menu &amp; Locations — Burger House</title>
+<meta name="description" content="Burger House Sri Lanka — full menu, opening hours, and locations for Moratuwa & Nugegoda. Order delivery on Uber Eats.">
+<link rel="icon" href="assets/logo-original.png" type="image/png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Manrope:wght@400;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ===================== NAV ===================== -->
+<nav class="site-nav nav-in" id="site-nav" style="position:static;">
+  <div class="container">
+    <a href="index.html" class="brand">
+      <img src="assets/logo-original.png" alt="Burger House logo">
+      <span>BURGER<br>HOUSE</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">The Experience</a></li>
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#hours">Hours &amp; Location</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a class="btn btn-sm btn-order" data-order-btn href="#" target="_blank" rel="noopener">Order Now</a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Menu"><span></span></button>
+    </div>
+  </div>
+</nav>
+
+
+<!-- ===================== MENU ===================== -->
+<section class="section" id="menu">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="eyebrow">The Menu</span>
+      <h2>Every Dish,<br>One Tap Away</h2>
+      <p>Tap a category to jump around, or tap Order to head straight to Uber Eats.</p>
+    </div>
+    <div class="menu-tabs" id="menu-tabs"></div>
+    <div class="menu-grid" id="menu-grid"></div>
+    <div class="addons-block reveal">
+      <h3>Add-Ons &amp; Extras</h3>
+      <div class="addons-list" id="addons-list"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== HOURS & LOCATION ===================== -->
+<section class="section" id="hours">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="eyebrow">Find Us</span>
+      <h2>Hours &amp; Location</h2>
+      <p>Two branches, same grill energy.</p>
+    </div>
+    <div class="locations-row reveal">
+      <div class="location-chip"><div class="city">Moratuwa</div><div class="tag">Original Location</div></div>
+      <div class="location-chip"><div class="city">Nugegoda</div><div class="tag">Second Branch</div></div>
+    </div>
+    <div class="branch-tabs reveal" id="branch-tabs"></div>
+    <p class="branch-address reveal" id="branch-address"></p>
+    <div class="info-grid">
+      <table class="hours-table reveal"><tbody id="hours-body"></tbody></table>
+      <div class="map-frame reveal">
+        <iframe id="map-iframe" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Burger House location map"></iframe>
+      </div>
+    </div>
+    <div style="margin-top:30px;display:flex;gap:14px;flex-wrap:wrap;">
+      <a class="btn btn-gold" data-directions-btn href="#" target="_blank" rel="noopener"><span class="icon">📍</span> Get Directions</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CONTACT ===================== -->
+<section class="section" id="contact">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="eyebrow">Get In Touch</span>
+      <h2>Say Hi</h2>
+      <p>Questions, catering, or a craving that can't wait — reach us however's easiest.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-card reveal">
+        <div class="icon">📞</div>
+        <h3>Call the Shop</h3>
+        <p data-phone-text>+94 77 229 9827</p>
+        <a class="link" data-call-btn href="tel:+94772299827">CALL NOW →</a>
+      </div>
+      <div class="contact-card reveal">
+        <div class="icon">💬</div>
+        <h3>WhatsApp the Shop</h3>
+        <p>Chat with us directly</p>
+        <a class="link" id="wa-shop-card" href="#" target="_blank" rel="noopener">MESSAGE US →</a>
+      </div>
+      <div class="contact-card reveal">
+        <div class="icon">📸</div>
+        <h3>Instagram</h3>
+        <p>Behind the grill &amp; daily specials</p>
+        <a class="link" data-social="instagram" href="#" target="_blank" rel="noopener">FOLLOW US →</a>
+      </div>
+      <div class="contact-card reveal">
+        <div class="icon">🎵</div>
+        <h3>TikTok</h3>
+        <p>The kottu chop, in motion</p>
+        <a class="link" data-social="tiktok" href="#" target="_blank" rel="noopener">WATCH US →</a>
+      </div>
+      <div class="contact-card reveal">
+        <div class="icon">📘</div>
+        <h3>Facebook</h3>
+        <p>Updates &amp; announcements</p>
+        <a class="link" data-social="facebook" href="#" target="_blank" rel="noopener">LIKE US →</a>
+      </div>
+      <div class="contact-card reveal">
+        <div class="icon">🛵</div>
+        <h3>Delivery</h3>
+        <p>Uber Eats, straight to you</p>
+        <a class="link" data-order-btn href="#" target="_blank" rel="noopener">ORDER NOW →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="container footer-grid">
+    <div>
+      <div class="footer-brand">
+        <img src="assets/logo-original.png" alt="Burger House logo">
+        <span>BURGER HOUSE</span>
+      </div>
+      <p style="max-width:280px;font-size:14px;color:var(--muted);">Stacked. Grilled. Devoured. Sri Lanka's home for Kottu, Dolphin, and everything between two buns — Moratuwa &amp; Nugegoda.</p>
+      <div class="social-row">
+        <a data-social="instagram" href="#" target="_blank" rel="noopener" aria-label="Instagram">📸</a>
+        <a data-social="tiktok" href="#" target="_blank" rel="noopener" aria-label="TikTok">🎵</a>
+        <a data-social="facebook" href="#" target="_blank" rel="noopener" aria-label="Facebook">📘</a>
+      </div>
+    </div>
+    <div>
+      <h4>Explore</h4>
+      <ul>
+        <li><a href="index.html">The Experience</a></li>
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#hours">Hours &amp; Location</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Order</h4>
+      <ul>
+        <li><a data-order-btn href="#" target="_blank" rel="noopener">Uber Eats Delivery</a></li>
+        <li><a data-call-btn href="tel:+94772299827">Call to Order</a></li>
+        <li><a href="dashboard.html">Staff Login</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="credit-bar">
+    Web Engineered and developed by <a id="credit-wa" href="#" target="_blank" rel="noopener">Omesh Lakshitha</a> — +94 77 475 0576
+  </div>
+</footer>
+
+<a class="wa-float" id="wa-float-shop" href="#" target="_blank" rel="noopener" aria-label="WhatsApp us">💬</a>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase-config.js"></script>
+<script type="module" src="js/app.js"></script>
+</body>
+</html>
