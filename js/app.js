@@ -30,20 +30,6 @@ function money(n){ if (n === null || n === undefined) return null; return Number
 function escapeHtml(str){ if (!str) return ''; return String(str).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 function waLink(number, text){ const digits = number.replace(/[^\d]/g, ''); return `https://wa.me/${digits}?text=${encodeURIComponent(text)}`; }
 
-/* ---------- WHATSAPP DEFAULT (works even before/without Supabase) ---------- */
-// The float/card links used to stay at href="#" until Supabase settings loaded,
-// so on a page without Supabase configured, clicking it did nothing. Give it a
-// real link right away; renderSettings() below will overwrite it with the live
-// dashboard number once/if Supabase settings load.
-const DEFAULT_WA_NUMBER = '+94772299827';
-(function applyDefaultWaLink(){
-  const link = waLink(DEFAULT_WA_NUMBER, "Hi Burger House! I'd like to place an order.");
-  const waFloat = document.getElementById('wa-float-shop');
-  const waCard = document.getElementById('wa-shop-card');
-  if (waFloat) waFloat.href = link;
-  if (waCard) waCard.href = link;
-})();
-
 /* ---------- RENDER: SETTINGS-DRIVEN CONTACT ---------- */
 function renderSettings(s){
   document.querySelectorAll('[data-order-btn]').forEach(el => el.href = s.ubereats_store_link);

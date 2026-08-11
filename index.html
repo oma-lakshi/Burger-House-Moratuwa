@@ -4,56 +4,69 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Burger House — Moratuwa &amp; Nugegoda | Stacked. Grilled. Devoured.</title>
-<meta name="description" content="Burger House Sri Lanka — Kottu, Dolphin, Fried Rice, Submarines & more. Order delivery on Uber Eats, open 8AM–1AM daily. Moratuwa & Nugegoda.">
+<meta name="description" content="Burger House Sri Lanka — Kottu, Dolphin, Fried Rice, Nasi Goreng, Submarines & more. Order delivery on Uber Eats, open 8AM–1AM daily. Moratuwa & Nugegoda.">
 <link rel="icon" href="assets/logo-original.png" type="image/png">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Manrope:wght@400;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800;900&family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="css/style.css">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          ink: '#0D0A08', ink2: '#171109', ink3: '#221808',
+          cream: '#F3EAD9', muted: '#B8AA8C', gold: '#E1CA22',
+          red: '#D4291F', reddark: '#A31D15',
+        },
+        fontFamily: {
+          display: ['Outfit', 'sans-serif'],
+          body: ['DM Sans', 'sans-serif'],
+        },
+      }
+    }
+  }
+</script>
+<link rel="stylesheet" href="css/custom.css">
 </head>
-<body id="page-top" class="gate-lock">
+<body class="font-body" style="overflow:hidden;">
 
-<!-- ===================== SCENE 0 — ENTRY GATE ===================== -->
-<div id="entry-gate">
-  <div id="frost-block">
-    <img class="frost-logo" src="assets/logo-original.png" alt="Burger House">
-    <div class="frost-ring-wrap">
-      <svg viewBox="0 0 120 120">
-        <circle class="frost-ring-bg" cx="60" cy="60" r="54"/>
-        <circle id="frost-ring" cx="60" cy="60" r="54"/>
-      </svg>
-    </div>
-    <div class="frost-pct" id="frost-pct">0%</div>
-    <div class="enter-hint" id="enter-hint">IGNITING</div>
-  </div>
-
-  <svg id="crack-layer" viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice">
-    <g id="crack-lines" fill="none" stroke="#fff8e6" stroke-width="1.6" stroke-linecap="round">
-      <path class="crack-path" d="M200,200 L150,88"/>
-      <path class="crack-path" d="M200,200 L252,66 L270,34"/>
-      <path class="crack-path" d="M200,200 L322,148"/>
-      <path class="crack-path" d="M200,200 L339,232 L368,258"/>
-      <path class="crack-path" d="M200,200 L258,332"/>
-      <path class="crack-path" d="M200,200 L163,347 L138,378"/>
-      <path class="crack-path" d="M200,200 L68,270"/>
-      <path class="crack-path" d="M200,200 L53,138 L28,102"/>
-      <path class="crack-path" d="M200,200 L118,152"/>
-      <path class="crack-path" d="M200,200 L282,238"/>
-      <path class="crack-path" d="M200,200 L235,145 L255,110"/>
-      <path class="crack-path" d="M200,200 L150,258 L120,290"/>
-    </g>
-  </svg>
-  <div id="light-burst"></div>
-
-  <div id="shatter-layer"></div>
+<!-- ===================== LOADING SCREEN ===================== -->
+<div id="loading-screen">
+  <video id="loading-video" src="assets/loading/burger-walk.mp4" autoplay muted loop playsinline></video>
+  <div class="loading-pct" id="loading-pct">0%</div>
+  <div class="loading-bar-wrap"><div class="loading-bar-fill" id="loading-fill"></div></div>
 </div>
+<script>
+(function(){
+  var fill = document.getElementById('loading-fill');
+  var pct = document.getElementById('loading-pct');
+  var screen = document.getElementById('loading-screen');
+  var p = 0;
+  var timer = setInterval(function(){
+    p = Math.min(100, p + Math.random() * 18 + 6);
+    fill.style.width = p + '%';
+    pct.textContent = Math.round(p) + '%';
+    if (p >= 100) {
+      clearInterval(timer);
+      setTimeout(function(){
+        screen.classList.add('hidden');
+        document.body.style.overflow = '';
+        setTimeout(function(){ screen.remove(); }, 600);
+      }, 200);
+    }
+  }, 140);
+  // hard safety net — never let the loading screen get stuck
+  setTimeout(function(){ if (screen && screen.parentNode) { screen.classList.add('hidden'); } }, 3500);
+})();
+</script>
 
 <!-- ===================== NAV ===================== -->
 <nav class="site-nav" id="site-nav">
   <div class="container">
-    <a href="#page-top" class="brand">
+    <a href="#top" class="brand">
       <img src="assets/logo-original.png" alt="Burger House logo">
       <span>BURGER<br>HOUSE</span>
     </a>
@@ -69,100 +82,137 @@
   </div>
 </nav>
 
-<!-- ===================== SCENES 1–4 — FPV CAMERA FLIGHT ===================== -->
-<div id="cine-root">
-  <div id="cine-pin">
-    <div class="cine-canvas-wrap"><canvas id="cine-canvas"></canvas></div>
-    <div class="cine-vignette"></div>
-    <div id="cine-fade-veil"></div>
-    <button class="cine-skip" id="cine-skip">Skip Intro ↓</button>
-
-    <div class="cine-text s1-left">
-      <span class="eyebrow">Moratuwa &amp; Nugegoda</span>
-      <h3>Stacked.<br>Grilled.</h3>
-      <p>Every layer, assembled right in front of you.</p>
-    </div>
-    <div class="cine-text s1-right">
-      <h3>Devoured.</h3>
-      <p>Fresh patties, real cheese, zero shortcuts.</p>
-    </div>
-    <div class="cine-text cine-details s1-details">
-      <span class="eyebrow">Find Us</span>
-      <h3>Open Daily<br>8AM – 1AM</h3>
-      <p>Moratuwa &amp; Nugegoda · Delivery on Uber Eats</p>
-    </div>
-
-    <div class="cine-finale">
-      <img class="logo-monolith" src="assets/logo-original.png" alt="Burger House">
-      <div class="cine-cta">
+<!-- ===================== HERO ===================== -->
+<header id="top" class="relative overflow-hidden pt-16 pb-24 md:pt-24 md:pb-32">
+  <div class="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-gold/10 rounded-full blur-[120px] pointer-events-none"></div>
+  <div class="container relative grid md:grid-cols-2 gap-12 items-center">
+    <div class="reveal">
+      <span class="inline-flex items-center gap-2 text-gold font-display font-semibold text-xs tracking-[3px] uppercase">
+        <i data-lucide="map-pin" class="w-3.5 h-3.5"></i> Moratuwa &amp; Nugegoda
+      </span>
+      <h1 class="font-display font-black uppercase text-[13vw] md:text-6xl lg:text-7xl leading-[0.95] mt-4 text-cream">
+        Stacked.<br>Grilled.<br><span class="text-red">Devoured.</span>
+      </h1>
+      <p class="mt-6 text-muted text-lg max-w-md">Fresh patties, real cheese, zero shortcuts — every layer assembled right in front of you, from Kottu to Nasi Goreng.</p>
+      <div class="mt-8 flex flex-wrap gap-4">
         <a class="btn btn-pulse" data-order-btn href="#" target="_blank" rel="noopener"><span class="icon">🍔</span> Order Now</a>
-        <a class="btn btn-outline" href="menu.html#hours"><span class="icon">📍</span> Find Our Shop</a>
+        <a class="btn btn-outline" href="#dishes"><span class="icon">👀</span> See The Menu</a>
       </div>
     </div>
-
-    <div class="scroll-cue"><span>▼</span>SCROLL</div>
-  </div>
-</div>
-
-<!-- ===================== HEADLINE STACK ===================== -->
-<section class="headline-stack">
-  <div class="container">
-    <div class="headline-row reveal">
-      <h2><span class="ghost">THE BURGER</span><span class="solid">THE BURGER</span></h2>
+    <div class="relative reveal flex justify-center md:justify-end">
+      <div class="absolute inset-0 bg-red/10 rounded-full blur-[90px]"></div>
+      <img src="assets/hero/burger-hero.webp" alt="Burger House signature burger" class="float-a relative w-[220px] md:w-[320px] drop-shadow-2xl">
+      <img src="assets/hero/onion-float.webp" alt="" class="float-b absolute top-[8%] -left-4 w-[110px] opacity-90 drop-shadow-xl" aria-hidden="true">
+      <div class="absolute bottom-6 right-2 float-b bg-ink2/80 backdrop-blur border border-white/10 rounded-2xl px-4 py-3 text-xs font-display font-semibold text-gold shadow-xl">
+        🔥 Flame Grilled Daily
+      </div>
     </div>
-    <div class="headline-row reveal">
-      <h2><span class="ghost">SMASHED&nbsp;FRESH</span><span class="solid accent">SMASHED&nbsp;FRESH</span></h2>
-    </div>
-    <p class="headline-sub reveal">Grilled hot, stacked high, our patties lock in every bit of juice under a caramelized crust — topped fresh, served loud, since day one in Moratuwa.</p>
   </div>
-</section>
+</header>
 
 <!-- ===================== MARQUEE ===================== -->
 <div class="marquee">
   <div class="marquee-track">
-    <span>Flame Grilled</span><span>Moratuwa</span><span>Nugegoda</span><span>Open 8AM–1AM</span><span>Order On Uber Eats</span>
-    <span>Flame Grilled</span><span>Moratuwa</span><span>Nugegoda</span><span>Open 8AM–1AM</span><span>Order On Uber Eats</span>
+    <span>Flame Grilled</span><span>Fried Rice</span><span>Nasi Goreng</span><span>Kottu</span><span>Dolphin</span><span>Open 8AM–1AM</span>
+    <span>Flame Grilled</span><span>Fried Rice</span><span>Nasi Goreng</span><span>Kottu</span><span>Dolphin</span><span>Open 8AM–1AM</span>
   </div>
 </div>
 
-<!-- ===================== QUALITY GRID ===================== -->
-<section class="section" id="quality">
+<!-- ===================== HORIZONTAL DISH SHOWCASE ===================== -->
+<section class="py-20 md:py-28" id="dishes">
   <div class="container">
-    <div class="section-header reveal">
-      <span class="eyebrow">Pure Quality</span>
-      <h2>Every Layer,<br>Signature Flavor</h2>
+    <div class="flex items-end justify-between gap-6 flex-wrap mb-8 reveal">
+      <div>
+        <span class="text-gold font-display font-semibold text-xs tracking-[3px] uppercase">The Menu</span>
+        <h2 class="font-display font-black uppercase text-3xl md:text-5xl mt-3 text-cream">Every Dish,<br>Sideways.</h2>
+      </div>
+      <p class="text-muted max-w-xs">Drag or scroll across — from Fried Rice and Nasi Goreng to Kottu, Dolphin, and beyond.</p>
     </div>
-    <div class="quality-grid">
-      <div class="quality-card reveal">
-        <div class="emoji">🧀</div>
-        <h3>Real Cheddar</h3>
-        <p>Melted, not processed</p>
+  </div>
+  <div class="hscroll container">
+    <div class="dish-card reveal">
+      <div class="dish-emoji">🍚</div>
+      <h3>Crispy Chicken Rice</h3>
+      <p>Basmati fried rice with chopsuey &amp; chilli paste</p>
+      <div class="dish-price">Rs 1420</div>
+    </div>
+    <div class="dish-card reveal">
+      <div class="dish-emoji">🍛</div>
+      <h3>Nasi Goreng</h3>
+      <p>Chicken, prawns, hotdog &amp; bullseye egg</p>
+      <div class="dish-price">Rs 1690</div>
+    </div>
+    <div class="dish-card reveal">
+      <div class="dish-emoji">🥘</div>
+      <h3>Burger House Special Kottu</h3>
+      <p>Chicken, fish, prawns, cuttlefish &amp; hotdog</p>
+      <div class="dish-price">Rs 1940</div>
+    </div>
+    <div class="dish-card reveal">
+      <div class="dish-emoji">🧀</div>
+      <h3>Chicken Cheese Kottu</h3>
+      <p>Our classic kottu, loaded with melted cheese</p>
+      <div class="dish-price">Rs 1820</div>
+    </div>
+    <div class="dish-card reveal">
+      <div class="dish-emoji">🐬</div>
+      <h3>Burger House Special Dolphin</h3>
+      <p>Chicken, fish, prawns, cuttlefish &amp; hotdog</p>
+      <div class="dish-price">Rs 1940</div>
+    </div>
+    <div class="dish-card reveal">
+      <div class="dish-emoji">🥪</div>
+      <h3>Beef Submarine 12"</h3>
+      <p>Toasted 12-inch sub, loaded with beef</p>
+      <div class="dish-price">Rs 1400</div>
+    </div>
+    <div class="dish-card reveal" style="background:var(--red);border-color:var(--red);">
+      <div class="dish-emoji">➡️</div>
+      <h3 class="text-white">See Full Menu</h3>
+      <p class="text-white/80">Every dish, every price, one page</p>
+      <a href="menu.html#menu" class="btn btn-sm btn-gold" style="margin-top:14px;width:100%;">View All</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== BENTO QUALITY GRID ===================== -->
+<section class="py-20 md:py-28">
+  <div class="container">
+    <div class="reveal mb-10">
+      <span class="text-gold font-display font-semibold text-xs tracking-[3px] uppercase">Pure Quality</span>
+      <h2 class="font-display font-black uppercase text-3xl md:text-5xl mt-3 text-cream">Every Layer,<br>On Purpose.</h2>
+    </div>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-5">
+      <div class="reveal col-span-2 md:col-span-2 bg-ink2 border border-white/10 rounded-3xl p-8 flex flex-col justify-between min-h-[200px] hover:border-gold/50 transition">
+        <i data-lucide="flame" class="w-8 h-8 text-red"></i>
+        <div><h3 class="font-display font-bold text-xl text-cream">Flame Grilled Patty</h3><p class="text-muted text-sm mt-1">Charred crust, juicy center, cooked to order.</p></div>
       </div>
-      <div class="quality-card reveal">
-        <div class="emoji">🥩</div>
-        <h3>Flame Grilled Patty</h3>
-        <p>Charred crust, juicy center</p>
+      <div class="reveal bg-ink2 border border-white/10 rounded-3xl p-6 flex flex-col justify-between min-h-[200px] hover:border-gold/50 transition">
+        <i data-lucide="leaf" class="w-7 h-7 text-gold"></i>
+        <div><h3 class="font-display font-bold text-base text-cream">Fresh Daily</h3><p class="text-muted text-xs mt-1">Veggies cut every morning.</p></div>
       </div>
-      <div class="quality-card reveal">
-        <div class="emoji">🍅</div>
-        <h3>Fresh Tomato</h3>
-        <p>Sliced daily, never frozen</p>
+      <div class="reveal bg-ink2 border border-white/10 rounded-3xl p-6 flex flex-col justify-between min-h-[200px] hover:border-gold/50 transition">
+        <i data-lucide="clock" class="w-7 h-7 text-gold"></i>
+        <div><h3 class="font-display font-bold text-base text-cream">8AM – 1AM</h3><p class="text-muted text-xs mt-1">Every single day.</p></div>
       </div>
-      <div class="quality-card reveal">
-        <div class="emoji">🥬</div>
-        <h3>Crisp Lettuce</h3>
-        <p>Garden fresh crunch</p>
+      <div class="reveal bg-ink2 border border-white/10 rounded-3xl p-6 flex flex-col justify-between min-h-[200px] hover:border-gold/50 transition">
+        <i data-lucide="bike" class="w-7 h-7 text-gold"></i>
+        <div><h3 class="font-display font-bold text-base text-cream">Fast Delivery</h3><p class="text-muted text-xs mt-1">Straight via Uber Eats.</p></div>
+      </div>
+      <div class="reveal col-span-2 md:col-span-2 bg-ink2 border border-white/10 rounded-3xl p-8 flex flex-col justify-between min-h-[200px] hover:border-gold/50 transition">
+        <i data-lucide="map-pin" class="w-8 h-8 text-red"></i>
+        <div><h3 class="font-display font-bold text-xl text-cream">Two Branches</h3><p class="text-muted text-sm mt-1">Moratuwa &amp; Nugegoda — same grill energy, same menu.</p></div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ===================== CLOSING CTA ===================== -->
-<section class="section" style="text-align:center;">
+<section class="py-24 text-center">
   <div class="container">
-    <span class="eyebrow reveal">Hungry Yet?</span>
-    <h2 class="reveal" style="font-size:clamp(28px,4.6vw,48px);margin-top:16px;">See The Full Menu<br>&amp; Find Your Branch</h2>
-    <div class="reveal" style="margin-top:30px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
+    <span class="text-gold font-display font-semibold text-xs tracking-[3px] uppercase reveal">Hungry Yet?</span>
+    <h2 class="font-display font-black uppercase text-3xl md:text-5xl mt-4 text-cream reveal">See The Full Menu<br>&amp; Find Your Branch</h2>
+    <div class="reveal mt-8 flex gap-4 justify-center flex-wrap">
       <a class="btn btn-pulse" href="menu.html#menu"><span class="icon">🍔</span> View Menu</a>
       <a class="btn btn-outline" href="menu.html#hours"><span class="icon">📍</span> Hours &amp; Location</a>
     </div>
@@ -177,17 +227,17 @@
         <img src="assets/logo-original.png" alt="Burger House logo">
         <span>BURGER HOUSE</span>
       </div>
-      <p style="max-width:280px;font-size:14px;color:var(--muted);">Stacked. Grilled. Devoured. Sri Lanka's home for Kottu, Dolphin, and everything between two buns — Moratuwa &amp; Nugegoda.</p>
+      <p style="max-width:280px;font-size:14px;color:var(--muted);">Stacked. Grilled. Devoured. Sri Lanka's home for Kottu, Dolphin, Fried Rice, and everything between two buns — Moratuwa &amp; Nugegoda.</p>
       <div class="social-row">
-        <a data-social="instagram" href="#" target="_blank" rel="noopener" aria-label="Instagram">📸</a>
+        <a data-social="instagram" href="#" target="_blank" rel="noopener" aria-label="Instagram"><i data-lucide="instagram" class="w-4 h-4"></i></a>
         <a data-social="tiktok" href="#" target="_blank" rel="noopener" aria-label="TikTok">🎵</a>
-        <a data-social="facebook" href="#" target="_blank" rel="noopener" aria-label="Facebook">📘</a>
+        <a data-social="facebook" href="#" target="_blank" rel="noopener" aria-label="Facebook"><i data-lucide="facebook" class="w-4 h-4"></i></a>
       </div>
     </div>
     <div>
       <h4>Explore</h4>
       <ul>
-        <li><a href="#page-top">The Experience</a></li>
+        <li><a href="#top">The Experience</a></li>
         <li><a href="menu.html#menu">Menu</a></li>
         <li><a href="menu.html#hours">Hours &amp; Location</a></li>
         <li><a href="menu.html#contact">Contact</a></li>
@@ -209,11 +259,10 @@
 
 <a class="wa-float" id="wa-float-shop" href="#" target="_blank" rel="noopener" aria-label="WhatsApp us">💬</a>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="js/supabase-config.js"></script>
-<script type="module" src="js/cinematic.js"></script>
 <script type="module" src="js/app.js"></script>
+<script>lucide.createIcons();</script>
 </body>
 </html>
